@@ -41,11 +41,25 @@ document.addEventListener(RENDER_BOOKS_EVENT, function () {
     const bookElement = createBookElement(book);
     if (!book.isComplete) {
       incompleteBookList.append(bookElement);
+      put_To_OtherBookShelf(bookElement);
+      removeBook(bookElement);
+
     } else {
       completeBookList.append(bookElement);
+      put_To_OtherBookShelf(bookElement);
+      removeBook(bookElement);
     }
   }
 });
+
+const get_nthParentElement = (element, n) => {
+  let current = element;
+  for (let i = 0; i < n; i++) {
+    current = current.parentElement;
+  }
+  
+  return current;
+}
 
 function generateId() {
   return +new Date();
@@ -53,17 +67,53 @@ function generateId() {
 
 const addNewBook = () => {
   const id = generateId();
-  const title = newBookFormTitle.value;
-  const author = newBookFormAuthor.value;
+  const title = newBookFormTitle.value.trim();
+  const author = newBookFormAuthor.value.trim();
   const year = newBookFormYear.value;
   const isComplete = newBookFormIsComplete.checked;
 
-  const userInput = {
-    id, title, author, year, isComplete
-  };
+  if (title !== "" && author !== "" && year !== "") {
+    const userInput = {
+      id, title, author, year, isComplete
+    };
+  
+    books.unshift(userInput);
+    console.log("books", books);
 
-  books.push(userInput);
+    updateLocalStorage(books);
+
+    document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
+  }
 };
+
+const put_To_OtherBookShelf = (bookElement) => {
+  const changeBookList = bookElement.querySelector("[data-testid='bookItemIsCompleteButton']");
+ 
+  changeBookList.addEventListener("click", function () {
+    const targetParentElement = get_nthParentElement(changeBookList, 2);
+    const bookId = targetParentElement.getAttribute("data-bookid");
+    const bookIndex = findBookIndex(bookId);
+  
+    if (bookIndex !== -1) {
+      books[bookIndex].isComplete = !books[bookIndex].isComplete;
+      updateLocalStorage(books);
+    }
+  })
+}
+
+const removeBook = (bookElement) => {
+  const deleteBook = bookElement.querySelector("[data-testid='bookItemDeleteButton']");
+
+  deleteBook.addEventListener("click", function () {
+    const bookId = bookElement.getAttribute("data-bookid");
+    const bookIndex = findBookIndex(bookId);
+
+    if (bookIndex !== -1) {
+      books.splice(bookIndex, 1);
+      updateLocalStorage(books);
+    }
+  })
+}
 
 const isWebStorageExist = () => {
   if (typeof(Storrage) === undefined) {
@@ -78,12 +128,20 @@ const loadFromStorage = () => {
 
   if (parsedBooks !== null) {
     for (const book of parsedBooks) {
-      books.push(book);
+      books.unshift(book);
     }
   }
 
   document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
 }
+
+const updateLocalStorage = (books) => {
+  console.log("books", books);
+  if (isWebStorageExist()) {
+    localStorage.setItem(books_keyLocalStorage, JSON.stringify(books));
+    document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
+  }
+};
 
 const createBookElement = (book) => {
   const bookItemElement = document.createElement("div");
@@ -106,7 +164,7 @@ const createBookElement = (book) => {
 
   const finished_buttonElement = document.createElement("button");
   finished_buttonElement.setAttribute("data-testid", "bookItemIsCompleteButton");
-  finished_buttonElement.innerText = book.isComplete ? "Belum Selesai Dibaca" : "Selesai Dibaca";
+  finished_buttonElement.innerText = book.isComplete ? "Baca ulang" : "Selesai Dibaca";
 
   const delete_buttonElement = document.createElement("button");
   delete_buttonElement.setAttribute("data-testid", "bookItemDeleteButton");
@@ -119,5 +177,10 @@ const createBookElement = (book) => {
   buttonContainer.append(finished_buttonElement, delete_buttonElement, edit_buttonElement);
   bookItemElement.append(titleElement, authorElement, yearElement, buttonContainer);
 
+  return  bookItemElement;
 }
 
+const findBookIndex = (bookId) => {
+  const targetIndex = books.findIndex(book => book.id == bookId);
+  return targetIndex;
+}
