@@ -1,0 +1,13 @@
+{
+  "name": "bookshelf-app-starter-project",
+  "version": "1.0.0",
+  "description": "Ini adalah starter project untuk siswa yang sedang mengerjakan tugas akhir kelas Belajar Membuat Front-End Web untuk Pemula.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Nikolaus Albert",
+  "license": "ISC"
+}
