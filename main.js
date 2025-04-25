@@ -3,6 +3,8 @@
 const books_keyLocalStorage = "booksList";
 const RENDER_BOOKS_EVENT = "render-books";
 let books = [];
+let searchBooks = [];
+let showSearchBooks = false;
 
 // New Book
 const bookForm = document.querySelector("#bookForm");
@@ -15,6 +17,7 @@ const newBookFormSubmit = document.querySelector("#bookFormSubmit");
 // Search Book
 const searchBookTitle = document.querySelector("#searchBookTitle");
 const searchBookSubmit = document.querySelector("#searchSubmit"); 
+const showAllBooks = document.querySelector("#showAllBooks");
 
 // Incomplete Book List
 const incompleteBookList = document.querySelector("#incompleteBookList");
@@ -37,7 +40,9 @@ document.addEventListener(RENDER_BOOKS_EVENT, function () {
   incompleteBookList.innerHTML = "";
   completeBookList.innerHTML = "";
 
-  for (const book of books) {
+  let typeBookList = showSearchBooks ? searchBooks : books;
+ 
+  for (const book of typeBookList) {
     const bookElement = createBookElement(book);
     if (!book.isComplete) {
       incompleteBookList.append(bookElement);
@@ -50,6 +55,30 @@ document.addEventListener(RENDER_BOOKS_EVENT, function () {
       removeBook(bookElement);
     }
   }
+});
+
+document.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const searchTitle = document.querySelector("#searchBookTitle").value.trim();
+
+  const filteredBooks = books.filter((book) => {
+    return book.title.toLowerCase() === searchTitle.toLowerCase();
+  });
+
+
+  if (filteredBooks.length > 0) {
+    showSearchBooks = true;
+  }
+  
+  searchBooks = filteredBooks;
+  document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
+});
+
+showAllBooks.addEventListener("click", function () {
+  
+  showSearchBooks = false;
+  searchBookTitle.value = "";
+  document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
 });
 
 const get_nthParentElement = (element, n) => {
@@ -78,10 +107,14 @@ const addNewBook = () => {
     };
   
     books.unshift(userInput);
-    console.log("books", books);
-
     updateLocalStorage(books);
+    showSearchBooks = false;
 
+    newBookFormTitle.value = "";
+    newBookFormAuthor.value = "";
+    newBookFormYear.value = "";
+    newBookFormIsComplete.checked = false;
+    
     document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
   }
 };
@@ -136,7 +169,6 @@ const loadFromStorage = () => {
 }
 
 const updateLocalStorage = (books) => {
-  console.log("books", books);
   if (isWebStorageExist()) {
     localStorage.setItem(books_keyLocalStorage, JSON.stringify(books));
     document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
