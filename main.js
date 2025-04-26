@@ -26,7 +26,7 @@ const incompleteBookList = document.querySelector("#incompleteBookList");
 const completeBookList = document.querySelector("#completeBookList");
 
 document.addEventListener("DOMContentLoaded", function () {
-  bookForm.addEventListener("submit", function (event) {
+  newBookFormSubmit.addEventListener("click", function (event) {
     event.preventDefault();
     addNewBook();
   })
@@ -164,7 +164,7 @@ const editBook = (bookElement) => {
 
   editBook.addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
+
     const bookId = bookElement.getAttribute("data-bookid");
     const bookIndex = findBookIndex(bookId);
 
@@ -300,7 +300,16 @@ const finish_edditBook = (bookIndex) => {
   
     // books[bookIndex] = editBook;
 
-    books.splice(bookIndex, 1, editBook);
+    // books.splice(bookIndex, 1, editBook);
+
+    books.map(book => {
+      if (book.id === books[bookIndex].id) {
+        book.title = editBookTitle;
+        book.author = editBookAuthor;
+        book.year = editBookYear;
+        book.isComplete = editBookIsComplete;
+      }
+    })
     
     console.log("post clicked edit bookList ", books);
   

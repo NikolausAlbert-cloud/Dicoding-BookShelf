@@ -46,7 +46,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0 50vh;
+  margin: 0 35vh;
 }
 
 main section {
@@ -158,3 +158,77 @@ button {
   width: 100%;
 }
 
+@media screen and (max-width: 1120px) {
+  main {
+    margin: 0 25vh;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  main {
+    margin: 0 15vh;
+  }
+
+  header {
+    height: 10vh;
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  main {
+    margin: 0 5vh;
+  }
+
+  header {
+    height: 8vh;
+    font-size: 1.2rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  main {
+    margin: 0 2vh;
+  }
+
+  header {
+    height: 6vh;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 0.8rem;
+  }
+
+  p {
+    font-size: 0.5rem;
+  }
+}
