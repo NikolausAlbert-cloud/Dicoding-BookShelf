@@ -110,7 +110,7 @@ const addNewBook = () => {
   const id = generateId();
   const title = newBookFormTitle.value.trim();
   const author = newBookFormAuthor.value.trim();
-  const year = newBookFormYear.value;
+  const year = parseInt(newBookFormYear.value);
   const isComplete = newBookFormIsComplete.checked;
 
   if (title !== "" && author !== "" && year !== "") {
@@ -199,7 +199,7 @@ const editBook = (bookElement) => {
   
         buttonContainer.append(finish_editButton, cancel_editButton);
       }
-      finish_edditBook(bookIndex)
+      finish_editBook(bookIndex)
       cancel_editBook();
     }
   });
@@ -227,7 +227,7 @@ const loadFromStorage = () => {
 
 const updateLocalStorage = () => {
   if (isWebStorageExist()) {
-    console.log("bookList jsut before saved in storage", books);
+
     setTimeout(() => {
       localStorage.setItem(books_keyLocalStorage, JSON.stringify(books));
       location.reload();
@@ -285,11 +285,11 @@ const findBookIndex = (bookId) => {
   return targetIndex;
 };
 
-const finish_edditBook = (bookIndex) => {
+const finish_editBook = (bookIndex) => {
   document.querySelector("#finish_editButton").addEventListener("click", function () {
     const editBookTitle = newBookFormTitle.value.trim();
     const editBookAuthor = newBookFormAuthor.value.trim();
-    const editBookYear = newBookFormYear.value.trim();
+    const editBookYear = parseInt(newBookFormYear.value.trim());
     const editBookIsComplete = newBookFormIsComplete.checked;
     
     const editBook = {
