@@ -31,8 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
     addNewBook();
   })
 
-  console.log("bookList after reload ", books)
-
   if (isWebStorageExist()) {
     loadFromStorage();
   }
@@ -119,7 +117,6 @@ const addNewBook = () => {
     };
   
     books.unshift(userInput);
-    console.log("books ", books);
 
     newBookFormTitle.value = "";
     newBookFormAuthor.value = "";
@@ -162,7 +159,6 @@ const removeBook = (bookElement) => {
 
 const editBook = (bookElement) => {
   const editBook = bookElement.querySelector("[data-testid='bookItemEditButton']");
-  console.log("intial BookList ", books)
 
   editBook.addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
