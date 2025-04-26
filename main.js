@@ -91,6 +91,8 @@ showAllBooks.addEventListener("click", function () {
   document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
 });
 
+
+// BELLOW ARE FUNCTION COLLECTION
 const get_nthParentElement = (element, n) => {
   let current = element;
   for (let i = 0; i < n; i++) {
@@ -100,7 +102,7 @@ const get_nthParentElement = (element, n) => {
   return current;
 }
 
-function generateId() {
+const generateId = () => {
   return +new Date();
 }
 
@@ -298,21 +300,9 @@ const finish_edditBook = (bookIndex) => {
       isComplete: editBookIsComplete
     };
   
-    // books[bookIndex] = editBook;
-
+    books[bookIndex] = editBook;
     // books.splice(bookIndex, 1, editBook);
 
-    books.map(book => {
-      if (book.id === books[bookIndex].id) {
-        book.title = editBookTitle;
-        book.author = editBookAuthor;
-        book.year = editBookYear;
-        book.isComplete = editBookIsComplete;
-      }
-    })
-    
-    console.log("post clicked edit bookList ", books);
-  
     updateLocalStorage();
   });
 };
