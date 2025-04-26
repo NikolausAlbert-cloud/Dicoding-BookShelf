@@ -5,7 +5,6 @@ const RENDER_BOOKS_EVENT = "render-books";
 let books = [];
 let searchBooks = [];
 let showSearchBooks = false;
-let editBookIndex = 0;
 
 // New Book
 const bookForm = document.querySelector("#bookForm");
@@ -31,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     addNewBook();
   })
+
+  console.log("bookList after reload ", books)
 
   if (isWebStorageExist()) {
     loadFromStorage();
@@ -159,11 +160,10 @@ const removeBook = (bookElement) => {
 
 const editBook = (bookElement) => {
   const editBook = bookElement.querySelector("[data-testid='bookItemEditButton']");
-
+  console.log("intial BookList ", books)
   editBook.addEventListener("click", function () {
     const bookId = bookElement.getAttribute("data-bookid");
     const bookIndex = findBookIndex(bookId);
-    editBookIndex = bookIndex;
 
     if (bookIndex !== -1) {
       newBookFormTitle.value = books[bookIndex].title;
@@ -194,7 +194,7 @@ const editBook = (bookElement) => {
   
         buttonContainer.append(finish_editButton, cancel_editButton);
       }
-
+      finish_edditBook(bookIndex)
       // cancel_editBook(bookIndex);
     }
   });
@@ -221,14 +221,13 @@ const loadFromStorage = () => {
 }
 
 const updateLocalStorage = () => {
-
   if (isWebStorageExist()) {
-    
+    console.log("bookList jsut before saved in storage", books);
     setTimeout(() => {
       localStorage.setItem(books_keyLocalStorage, JSON.stringify(books));
       location.reload();
       // document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
-    }, 0);
+    }, 5000);
     
   }
 };
@@ -280,25 +279,27 @@ const createBookElement = (book) => {
 const findBookIndex = (bookId) => {
   const targetIndex = books.findIndex(book => book.id == bookId);
   return targetIndex;
-}
+};
 
-document.querySelector("#finish_editButton").addEventListener("click", function () {
-  const editBookTitle = newBookFormTitle.value.trim();
-  const editBookAuthor = newBookFormAuthor.value.trim();
-  const editBookYear = newBookFormYear.value.trim();
-  const editBookIsComplete = newBookFormIsComplete.checked;
+const finish_edditBook = (bookIndex) => {
+  document.querySelector("#finish_editButton").addEventListener("click", function () {
+    const editBookTitle = newBookFormTitle.value.trim();
+    const editBookAuthor = newBookFormAuthor.value.trim();
+    const editBookYear = newBookFormYear.value.trim();
+    const editBookIsComplete = newBookFormIsComplete.checked;
+    
+    const editBook = {
+      id: books[bookIndex].id,
+      title: editBookTitle,
+      author: editBookAuthor,
+      year: editBookYear,
+      isComplete: editBookIsComplete
+    };
   
-  const editBook = {
-    id: books[editBookIndex].id,
-    title: editBookTitle,
-    author: editBookAuthor,
-    year: editBookYear,
-    isComplete: editBookIsComplete
-  };
-
-  books[editBookIndex] = editBook;
+    books[bookIndex] = editBook;
+    
+    console.log("post clicked edit bookList ", books);
   
-  console.log("books ", books);
-
-  updateLocalStorage();
-});
+    updateLocalStorage();
+  });
+};
