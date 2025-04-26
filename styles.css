@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --darkBlue: #80CBC4;
+  --lightBlue: #B4EBE6;
+  --pastel: #FBF8EF;
+  --orange: #FFB433;
+}
+
+body {
+  margin: 0 auto;
+  font-family: "National Park", sans-serif;
+}
+
+h2 {
+  margin: 0;
+}
+
+header {
+  background-color: var(--lightBlue);
+  width: 100%;
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 5rem;
+}
+
+main :first-child {
+  margin-top: 1rem;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--darkBlue);
+  border-radius: 1rem;
+  margin-bottom: 1rem; 
+}

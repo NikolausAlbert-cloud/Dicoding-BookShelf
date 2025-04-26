@@ -195,7 +195,7 @@ const editBook = (bookElement) => {
         buttonContainer.append(finish_editButton, cancel_editButton);
       }
       finish_edditBook(bookIndex)
-      // cancel_editBook(bookIndex);
+      cancel_editBook();
     }
   });
 };
@@ -296,10 +296,18 @@ const finish_edditBook = (bookIndex) => {
       isComplete: editBookIsComplete
     };
   
-    books[bookIndex] = editBook;
+    // books[bookIndex] = editBook;
+
+    books.splice(bookIndex, 1, editBook);
     
     console.log("post clicked edit bookList ", books);
   
     updateLocalStorage();
   });
 };
+
+const cancel_editBook = () => {
+  document.querySelector("#cancel_editButton").addEventListener("click", function () {
+    location.reload();
+  });
+}
