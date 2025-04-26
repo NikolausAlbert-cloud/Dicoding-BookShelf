@@ -10,10 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&family=Tagesschrift&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
     <script src="main.js" type="module" defer></script>
     <!-- Impor script kamu di sini -->
     <!-- Lampirkan `defer` jika pemanggilan dilakukan dalam <head> -->
-    <script defer src="main.js"></script>
   </head>
   <body>
     <header>
@@ -36,7 +37,7 @@
             <label for="bookFormYear">Tahun</label>
             <input id="bookFormYear" type="number" required data-testid="bookFormYearInput" />
           </div>
-          <div>
+          <div id="bookFormIsCompleteContainer">
             <label for="bookFormIsComplete">Selesai dibaca</label>
             <input
               id="bookFormIsComplete"
@@ -51,21 +52,23 @@
       </section>
 
       <section>
-        <h2>Cari Buku</h2>
+        <h2><img src="./assets/images/scan-search.svg" alt="scanIcon" class="icon">Cari Buku</h2>
         <form id="searchBook" data-testid="searchBookForm">
           <label for="searchBookTitle">Judul</label>
           <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" />
-          <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
-            Cari
-          </button>
-          <button id="showAllBooks" type="submit">
-            Tampilkan semua buku
-          </button>
+          <div>
+            <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
+              Cari
+            </button>
+            <button id="showAllBooks" type="submit">
+              Tampilkan semua buku
+            </button>
+          </div>
         </form>
       </section>
 
       <section>
-        <h2>Belum selesai dibaca</h2>
+        <h2><img src="./assets/images/bell-ring.svg" alt="bellRingIcon" class="icon">Belum selesai dibaca</h2>
 
         <div id="incompleteBookList" data-testid="incompleteBookList">
           <!-- 
@@ -86,7 +89,7 @@
       </section>
 
       <section>
-        <h2>Selesai dibaca</h2>
+        <h2 class="iconContainer"><img src="./assets/images/badge-check.svg" alt="check-Icon" class="icon">Selesai dibaca</h2>
 
         <div id="completeBookList" data-testid="completeBookList">
           <!-- 

@@ -44,10 +44,10 @@ document.addEventListener(RENDER_BOOKS_EVENT, function () {
 
   let typeBookList = showSearchBooks ? searchBooks : books;
  
-  // if (typeBookList.length === 0) {
-  //   incompleteBookList.append(createBookShelfInfo_Frame());
-  //   completeBookList.append(createBookShelfInfo_Frame());
-  // };
+  if (typeBookList.length === 0) {
+    incompleteBookList.append(createBookShelfInfo_Frame());
+    completeBookList.append(createBookShelfInfo_Frame());
+  };
 
   for (const book of typeBookList) {
     const bookElement = createBookElement(book);
@@ -226,8 +226,7 @@ const updateLocalStorage = () => {
     setTimeout(() => {
       localStorage.setItem(books_keyLocalStorage, JSON.stringify(books));
       location.reload();
-      // document.dispatchEvent(new Event(RENDER_BOOKS_EVENT));
-    }, 5000);
+    }, 0);
     
   }
 };
@@ -250,11 +249,11 @@ const createBookElement = (book) => {
 
   const authorElement = document.createElement("p");
   authorElement.setAttribute("data-testid", "bookItemAuthor");
-  authorElement.innerText = `Penulis: ${book.author}`;
+  authorElement.innerHTML = `<strong>Penulis</strong>: ${book.author}`;
 
   const yearElement = document.createElement("p");
   yearElement.setAttribute("data-testid", "bookItemYear");
-  yearElement.innerText = `Tahun ${book.year}`;
+  yearElement.innerHTML = `<strong>Tahun:</strong> ${book.year}`;
 
   const buttonContainer = document.createElement("div");
 
