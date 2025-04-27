@@ -48,7 +48,6 @@
           </button>
         </form>
       </section>
-
       <section>
         <h2><img src="./assets/images/scan-search.svg" alt="scanIcon" class="icon">Cari Buku</h2>
         <form id="searchBook" data-testid="searchBookForm">
@@ -69,20 +68,6 @@
         <h2><img src="./assets/images/bell-ring.svg" alt="bellRingIcon" class="icon">Belum selesai dibaca</h2>
 
         <div id="incompleteBookList" data-testid="incompleteBookList">
-          <!-- 
-            Ini adalah struktur HTML untuk masing-masing buku.
-            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
-          -->
-          <!-- <div data-bookid="123123123" data-testid="bookItem">
-            <h3 data-testid="bookItemTitle">Judul Buku 1</h3>
-            <p data-testid="bookItemAuthor">Penulis: Penulis Buku 1</p>
-            <p data-testid="bookItemYear">Tahun: 2030</p>
-            <div>
-              <button data-testid="bookItemIsCompleteButton">Selesai dibaca</button>
-              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
-              <button data-testid="bookItemEditButton">Edit Buku</button>
-            </div>
-          </div> -->
         </div>
       </section>
 
@@ -90,22 +75,17 @@
         <h2 class="iconContainer"><img src="./assets/images/badge-check.svg" alt="check-Icon" class="icon">Selesai dibaca</h2>
 
         <div id="completeBookList" data-testid="completeBookList">
-          <!-- 
-            Ini adalah struktur HTML untuk masing-masing buku.
-            Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
-          -->
-          <!-- <div data-bookid="456456456" data-testid="bookItem">
-            <h3 data-testid="bookItemTitle">Judul Buku 2</h3>
-            <p data-testid="bookItemAuthor">Penulis: Penulis Buku 2</p>
-            <p data-testid="bookItemYear">Tahun: 2030</p>
-            <div>
-              <button data-testid="bookItemIsCompleteButton">Selesai dibaca</button>
-              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
-              <button data-testid="bookItemEditButton">Edit Buku</button>
-            </div>
-          </div> -->
         </div>
       </section>
+      <dialog data-modal>
+        <div id="modalContent">
+          <p>Anda yakin ingin menghapus buku ini?</p>
+          <div>
+            <button data-cancel-modal>Batalkan</button>
+            <button data-proceed-modal>Lanjutkan</button>
+        </div>
+        </div>
+      </dialog>
     </main>
   </body>
 </html>

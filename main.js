@@ -25,6 +25,11 @@ const incompleteBookList = document.querySelector("#incompleteBookList");
 // Complete Book List
 const completeBookList = document.querySelector("#completeBookList");
 
+// Dialog Modal
+const dialog = document.querySelector("[data-modal]");
+const proceedModalButton = document.querySelector("[data-proceed-modal]");
+const cancelModalButton = document.querySelector("[data-cancel-modal]"); 
+
 document.addEventListener("DOMContentLoaded", function () {
   newBookFormSubmit.addEventListener("click", function (event) {
     event.preventDefault();
@@ -90,6 +95,20 @@ showAllBooks.addEventListener("click", function () {
 });
 
 
+// If clicking outside dialog, it closes the dialog and cancel removeBook
+dialog.addEventListener("click", e => {
+  const dialogDimensions = dialog.getBoundingClientRect()
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    dialog.close()
+    return;
+  }
+})
+
 // BELLOW ARE FUNCTION COLLECTION
 const get_nthParentElement = (element, n) => {
   let current = element;
@@ -144,18 +163,29 @@ const put_To_OtherBookShelf = (bookElement) => {
 }
 
 const removeBook = (bookElement) => {
+
   const deleteBook = bookElement.querySelector("[data-testid='bookItemDeleteButton']");
 
   deleteBook.addEventListener("click", function () {
-    const bookId = bookElement.getAttribute("data-bookid");
-    const bookIndex = findBookIndex(bookId);
+    dialog.showModal()
+    
+    cancelModalButton.addEventListener("click", function () {
+      dialog.close()
+      return;
+    }); 
 
-    if (bookIndex !== -1) {
-      books.splice(bookIndex, 1);
-      updateLocalStorage();
-    }
+    proceedModalButton.addEventListener("click", function () {
+      dialog.close();
+      const bookId = bookElement.getAttribute("data-bookid");
+      const bookIndex = findBookIndex(bookId);
+  
+      if (bookIndex !== -1) {
+        books.splice(bookIndex, 1);
+        updateLocalStorage();
+      }
+    });
   })
-}
+};
 
 const editBook = (bookElement) => {
   const editBook = bookElement.querySelector("[data-testid='bookItemEditButton']");
