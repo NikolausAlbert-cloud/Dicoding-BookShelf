@@ -21,22 +21,22 @@
 
     <main>
       <section>
-        <h2>Tambah Buku Baru</h2>
+        <h2>Add New Book</h2>
         <form id="bookForm" data-testid="bookForm">
           <div>
-            <label for="bookFormTitle">Judul</label>
+            <label for="bookFormTitle">Title</label>
             <input id="bookFormTitle" type="text" required data-testid="bookFormTitleInput" />
           </div>
           <div>
-            <label for="bookFormAuthor">Penulis</label>
+            <label for="bookFormAuthor">Author</label>
             <input id="bookFormAuthor" type="text" required data-testid="bookFormAuthorInput" />
           </div>
           <div>
-            <label for="bookFormYear">Tahun</label>
+            <label for="bookFormYear">Year</label>
             <input id="bookFormYear" type="number" required data-testid="bookFormYearInput" />
           </div>
           <div id="bookFormIsCompleteContainer">
-            <label for="bookFormIsComplete">Selesai dibaca</label>
+            <label for="bookFormIsComplete">Finished Reading</label>
             <input
               id="bookFormIsComplete"
               type="checkbox"
@@ -44,48 +44,62 @@
             />
           </div>
           <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
-            Masukkan Buku ke rak <span>Belum selesai dibaca</span>
+            Put Book to Shelf
           </button>
         </form>
       </section>
       <section>
-        <h2><img src="./assets/images/scan-search.svg" alt="scanIcon" class="icon">Cari Buku</h2>
+        <h2><img src="./assets/images/scan-search.svg" alt="scanIcon" class="icon">Search Book</h2>
         <form id="searchBook" data-testid="searchBookForm">
-          <label for="searchBookTitle">Judul</label>
+          <label for="searchBookTitle">Title</label>
           <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" />
           <div>
             <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
-              Cari
+              Search
             </button>
             <button id="showAllBooks" type="submit">
-              Tampilkan semua buku
+              Display All Books
             </button>
           </div>
         </form>
       </section>
 
       <section>
-        <h2><img src="./assets/images/bell-ring.svg" alt="bellRingIcon" class="icon">Belum selesai dibaca</h2>
+        <h2><img src="./assets/images/bell-ring.svg" alt="bellRingIcon" class="icon">Not Finished Reading</h2>
 
         <div id="incompleteBookList" data-testid="incompleteBookList">
         </div>
       </section>
 
       <section>
-        <h2 class="iconContainer"><img src="./assets/images/badge-check.svg" alt="check-Icon" class="icon">Selesai dibaca</h2>
+        <h2 class="iconContainer"><img src="./assets/images/badge-check.svg" alt="check-Icon" class="icon">Finished Reading</h2>
 
         <div id="completeBookList" data-testid="completeBookList">
         </div>
       </section>
       <dialog data-modal>
         <div id="modalContent">
-          <p>Anda yakin ingin menghapus buku ini?</p>
+          <p>Are you sure you want to delete this book?</p>
           <div>
-            <button data-cancel-modal>Batalkan</button>
-            <button data-proceed-modal>Lanjutkan</button>
+            <button data-cancel-modal>Cancel</button>
+            <button data-proceed-modal>Continue</button>
         </div>
         </div>
       </dialog>
     </main>
   </body>
+  <footer>
+      <div>
+        <p>Bookshelf App, 1/6/2025</p>
+        <p>Bandung, Indonesia</p>
+      </div>
+      <div id="author">
+        <img src="./assets/images/activity.svg" alt="scanIcon" class="icon">
+        <p>by Nikolaus E. Albert</p>
+      </div>
+      <div>
+        <p>Github: NikolausAlbert-cloud</p>
+        <p>edX Account: 1nikolaus_albert1</p>
+      </div>
+    </div>
 </html>

@@ -148,6 +148,17 @@ form input {
   gap: 1rem;
 }
 
+#bookFormSubmit {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: var(--darkBlue);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 0.8rem;
+}
+
 #bookFormIsCompleteContainer {
   display: flex;
   flex-direction: row;
@@ -190,6 +201,32 @@ button {
   margin-right: 0;
   margin-left: 0;
   width: 100%;
+}
+
+footer {
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--darkBlue);
+  width: 100%;
+  color: white;
+  font-size: 1rem;
+  margin-top: 1rem;
+
+  > div {
+    margin: 1rem auto;
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+  }
+}
+
+#author {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 1120px) {

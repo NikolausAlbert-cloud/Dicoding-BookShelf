@@ -215,12 +215,12 @@ const editBook = (bookElement) => {
       const buttonContainer = document.querySelector("#buttonContainer");
       if (buttonContainer.childElementCount < 2) {
         const finish_editButton = document.createElement("button");
-        finish_editButton.innerText = "Selesai Edit";
+        finish_editButton.innerText = "Finished Editing";
         finish_editButton.setAttribute("id", "finish_editButton");
         finish_editButton.setAttribute("type", "submit");
   
         const cancel_editButton = document.createElement("button");
-        cancel_editButton.innerText = "Batal Edit";
+        cancel_editButton.innerText = "Cancel Editing";
         cancel_editButton.setAttribute("id", "cancel_editButton");
   
         buttonContainer.append(finish_editButton, cancel_editButton);
@@ -264,7 +264,7 @@ const updateLocalStorage = () => {
 
 const createBookShelfInfo_Frame = () => {
   const emptyBookList = document.createElement("p");
-  emptyBookList.innerHTML = "<i>Tidak ada buku</i>";
+  emptyBookList.innerHTML = "<i>Empty Book List</i>";
 
   return emptyBookList;
 }
@@ -290,15 +290,15 @@ const createBookElement = (book) => {
 
   const finished_buttonElement = document.createElement("button");
   finished_buttonElement.setAttribute("data-testid", "bookItemIsCompleteButton");
-  finished_buttonElement.innerText = book.isComplete ? "Baca ulang" : "Selesai Dibaca";
+  finished_buttonElement.innerText = book.isComplete ? "Read Again" : "Finish Reading";
 
   const delete_buttonElement = document.createElement("button");
   delete_buttonElement.setAttribute("data-testid", "bookItemDeleteButton");
-  delete_buttonElement.innerText = "Hapus Buku";
+  delete_buttonElement.innerText = "Delete Book";
 
   const edit_buttonElement = document.createElement("button");
   edit_buttonElement.setAttribute("data-testid", "bookItemEditButton");
-  edit_buttonElement.innerText = "Edit Buku";
+  edit_buttonElement.innerText = "Edit Book";
 
   buttonContainer.append(finished_buttonElement, delete_buttonElement, edit_buttonElement);
   bookItemElement.append(titleElement, authorElement, yearElement, buttonContainer);
